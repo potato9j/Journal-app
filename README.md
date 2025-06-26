@@ -96,16 +96,40 @@ journal-app/
    npm i -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p
    ```
-2. **Tailwind 세팅** – `tailwind.config.js` 경로 포함, `src/index.css`에 지시자 추가
-3. **상단 Tabs 컴포넌트 구현** – `Tabs.jsx + TabButton.jsx`
+2. **Tabs + Router + Pop‑up Trigger**
 
-   * `activeTab` state 유지
-   * 클릭 시 URL 변경 + 다른 탭 `tab-inactive` 클래스 적용
+  ```
+  // App.jsx (발췌)
+  const [showModal, setShowModal] = useState(null); // 'about'|'help'|'support'|null
+  <header>
+    <Tabs />
+    <nav className="meta-links">
+      <button onClick={()=>setShowModal('about')}>제작</button>
+      <button onClick={()=>setShowModal('help')}>사용법</button>
+      <button onClick={()=>setShowModal('support')}>지원 연락처</button>
+    </nav>
+  </header>
+  {showModal==='about' && <AboutModal onClose={()=>setShowModal(null)} />}
+  {/* ... */}
+  ```
+
+
+3. **Chat Area** – 각 탭 화면에서
+
+  ```
+  const [messages,setMessages]=useState([]);
+  const handleSubmit=(txt)=>{
+    const res=parse(txt, activeTab);
+    setMessages([...messages,{role:'user',txt},{role:'system',res}]);
+  }
+  ```
+
 4. **각 routes/** 작성 – 9개 탭 화면. 공통 UI 컴포넌트 사용
-5. **dictionary.js & ruleMatrix.js** – 계정표 + 매핑 테이블 작성
-6. **parser.js** – 텍스트 → `{ debit, credit, amount }` 로 변환
-7. **배포 스크립트 & GitHub Actions** 설정 (위 스니펫)
-8. **UI 검수** – 활성 탭 외 나머지 탭 blur/gray 동작 확인
+5. **Modal CSS** - `position:fixed; top:50%; left:50%; transform:translate(-50%,-50%)` + `backdrop-filter:blur(2px)`
+6. **dictionary.js & ruleMatrix.js** – 계정표 + 매핑 테이블 작성
+7. **parser.js** – 텍스트 → `{ debit, credit, amount }` 로 변환
+8. **배포 스크립트 & GitHub Actions** 설정 (위 스니펫)
+9. **UI 검수** – 활성 탭 외 나머지 탭 blur/gray 동작 확인
 
 ---
 
@@ -136,10 +160,28 @@ OUT --> UI[ResultCard]
 
 ---
 
-## 6. 추가 TODO (향후 개선)
+## 6. 팝업 내용 초안
 
-* 분개 결과 → CSV 다운로드
-* LocalStorage 거래 히스토리 저장
-* 계정과목 다국어(영/한) 토글
+**제작**
+```
+* Fronted : React(Vite)
+* Style : CSS Modules + Vanilla CSS (not Tailwind)
+```
+
+**사용법**
+```
+1. 상단 탭 선택
+2. 하단 공용 입력창에 거래를 입력하세요.
+  Ex. 3월1일 상품 50,000원을 외상으로 매입했다.
+  ** 새로운 거래를 입력하면 기존 답변은 저장되지 않습니다.
+```
+
+**지원 연락처**
+```
+문의 : 00000000@gmail.com
+```
+
+
+
 
 
