@@ -24,10 +24,11 @@ journal-app/
 │   ├─ App.jsx                 # 상단 Tabs + 우측 Pop‑up Trigger + Router
 │   ├─ index.css               # Reset / 글로벌 변수
 │   ├─ components/
-│   │   ├─ Tabs/               # 상단 9 개 탭 UI
+│   │   ├─ Tabs/               # 상단 9개 탭 UI
 │   │   │   ├─ Tabs.jsx
 │   │   │   ├─ Tabs.module.css
 │   │   │   └─ TabButton.jsx
+│   │   ├─ Popup.module.css    # 팝업창 css
 │   │   ├─ InputBox.jsx        # “거래를 입력하세요” 공용 입력창
 │   │   ├─ InputBox.module.css
 │   │   ├─ ChatArea.jsx        # 분개 결과 log 창
@@ -42,6 +43,7 @@ journal-app/
 │   │   ├─ MovingAvg.jsx         # 이동평균법
 │   │   ├─ WeightedAvg.jsx       # 총평균법
 │   │   ├─ Physical.jsx          # 실지재고조사법
+│   │   ├─ index.js          
 │   │   ├─ Shrinkage.jsx         # 재고자산 감모손실
 │   │   └─ Valuation.jsx         # 재고자산 평가손실
 │   ├─ styles/
@@ -55,8 +57,9 @@ journal-app/
 │   │   ├─ parserInventory.js # FIFO / LIFO / 이동 / 총평균 / 실지
 │   │   ├─ parserLoss.js      # 감모, 평가 손실
 │   │   ├─ ruleMatrux.js      # 동사, 방법, 대상 메트릭스
-│   │   ├─ depreciationUtill.js  # 정액, 정률, 생산량법 계산
-│   │   ├─ inventoryUtill.js  # 단가, 재고수량 계산 공통 함수         
+│   │   ├─ depreciationUtil.js  # 정액, 정률, 생산량법 계산
+│   │   ├─ inventoryUtil.js   # 단가, 재고수량 계산 공통 함수
+│   │   └─ accrual.js         # 월할, 이자 발생액 계산 유틸
 │   └─ utils/
 │       ├─ date.js            # 한글 날짜 → Date 변환
 │       └─ number.js          # 한글 금액 → Number 변환
