@@ -54,6 +54,8 @@ journal-app/
 │   │   ├─ parserAdjust.js    # 수정 분개 (기간, 월할, 일할)
 │   │   ├─ parserInventory.js # FIFO / LIFO / 이동 / 총평균 / 실지
 │   │   ├─ parserLoss.js      # 감모, 평가 손실
+│   │   ├─ ruleMatrux.js      # 동사, 방법, 대상 메트릭스
+│   │   ├─ depreciationUtill.js  # 정액, 정률, 생산량법 계산
 │   │   ├─ inventoryUtill.js  # 단가, 재고수량 계산 공통 함수         
 │   └─ utils/
 │       ├─ date.js            # 한글 날짜 → Date 변환
