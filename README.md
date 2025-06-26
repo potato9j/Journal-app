@@ -8,6 +8,7 @@
 > **[Without any external APIs]** <br>
 
 > 본 파일은 프로젝트 초기 계획으로, 중기 / 말기 각 시점마다 새로운 README가 작성됨.
+> 최하단 update contents 내역표 
 ---
 * 25년 06월 27일 02:57 update
   * 베타 시스템 작동 확인 / 표면적 에러 수정
