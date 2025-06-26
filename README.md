@@ -18,16 +18,22 @@ journal-app/
 ├─ package.json               # 의존성 / 빌드·배포 스크립트 / homepage
 ├─ vite.config.js             # Vite 설정 (경로·빌드 최적화)
 ├─ public/
-│   └─ index.html             # 단일 HTML 엔트리 – React 루트 (#root)
+│   └─ index.html              # React 마운트 (#root)
 ├─ src/
-│   ├─ main.jsx               # React 진입점 – <App /> 마운트
-│   ├─ App.jsx                # **상단 탭** + `<BrowserRouter>`
-│   ├─ index.css              # 전역 스타일 (Tailwind 선택)
+│   ├─ main.jsx                # React 엔트리
+│   ├─ App.jsx                 # 상단 Tabs + 우측 Pop‑up Trigger + Router
+│   ├─ index.css               # Reset / 글로벌 변수
 │   ├─ components/
-│   │   ├─ InputBox.jsx       # "거래를 입력하세요" 공용 입력창
-│   │   ├─ ResultCard.jsx     # 차변·대변 결과 카드
-│   │   ├─ Tabs.jsx           # 상단 탭 + **blur / gray‑out 로직 포함**
-│   │   └─ TabButton.jsx      # 탭 개별 버튼 컴포넌트
+│   │   ├─ Tabs/               # 상단 9 개 탭 UI
+│   │   │   ├─ Tabs.jsx
+│   │   │   ├─ Tabs.module.css
+│   │   │   └─ TabButton.jsx
+│   │   ├─ InputBox.jsx        # “거래를 입력하세요” 공용 입력창
+│   │   ├─ InputBox.module.css
+│   │   ├─ ChatArea.jsx        # GPT 답변 (분개 결과 log 창)
+│   │   ├─ ChatArea.module.css
+│   │   ├─ ResultCard.jsx      # 차변/대변 결과
+│   │   └─ ResultCard.module.css
 │   ├─ routes/                # **9개 탭 화면**
 │   │   ├─ BasicEntry.jsx        # 기초분개
 │   │   ├─ AdjustingEntry.jsx    # 수정분개
@@ -39,8 +45,8 @@ journal-app/
 │   │   ├─ Shrinkage.jsx         # 재고자산 감모손실
 │   │   └─ Valuation.jsx         # 재고자산 평가손실
 │   ├─ styles/
-│   │   ├─ tabs.css           # **활성 탭‑비활성 탭 블러·회색 처리**
-│   │   └─ result-card.css
+│   │   ├─ variables.css       # CSS 변수
+│   │   └─ animations.css
 │   ├─ engine/                # 분개 엔진 로직
 │   │   ├─ dictionary.js      # 계정과목·동의어 사전
 │   │   ├─ ruleMatrix.js      # 동사+대상+방법 → 차·대 매핑
