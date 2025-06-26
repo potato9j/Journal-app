@@ -48,10 +48,13 @@ journal-app/
 │   │   ├─ variables.css       # CSS 변수
 │   │   └─ animations.css
 │   ├─ engine/                # 분개 엔진 로직
-│   │   ├─ dictionary.js      # 계정과목·동의어 사전
-│   │   ├─ ruleMatrix.js      # 동사+대상+방법 → 차·대 매핑
-│   │   ├─ accrual.js         # 월할·일할 이자 계산 util
-│   │   └─ parser.js          # 자연어 파싱 & 룰 매칭
+│   │   ├─ chart.json         # 사진의 표를 그대로 json화 (계정명, 동의어, 성격)
+│   │   ├─ index.js           # 탭 종류에 따라 서브 파서 호출
+│   │   ├─ parserBasic.js     # 기초 분개
+│   │   ├─ parserAdjust.js    # 수정 분개 (기간, 월할, 일할)
+│   │   ├─ parserInventory.js # FIFO / LIFO / 이동 / 총평균 / 실지
+│   │   ├─ parserLoss.js      # 감모, 평가 손실
+│   │   ├─ inventoryUtill.js  # 단가, 재고수량 계산 공통 함수         
 │   └─ utils/
 │       ├─ date.js            # 한글 날짜 → Date 변환
 │       └─ number.js          # 한글 금액 → Number 변환
