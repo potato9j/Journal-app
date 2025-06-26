@@ -6,6 +6,10 @@
 > **Goal**: Convert Korean natural‑language transaction sentences into double‑entry journal entries (차변 / 대변) <br>
 > **[Without any external APIs]** <br>
 > 본 파일은 프로젝트 초기 계획으로, 중기 / 말기 각 시점마다 새로운 README가 작성됨.
+---
+* 25년 06월 27일 02:57 update
+  * 베타 시스템 작동 확인 / 표면적 에러 수정
+  * <보완사항> 코드 간결화 / 복잡성 높은 구문 분석 메트릭스 보완
 
 ---
 
