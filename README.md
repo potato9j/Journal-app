@@ -4,7 +4,7 @@
 
 > **Stack** : React (Vite, **JavaScript**), GitHub Pages, Pure Client‑Side Rule Engine <br>
 > **Goal**: Convert Korean natural‑language transaction sentences into double‑entry journal entries (차변 / 대변) <br>
-> **[Without any external APIs]**.
+> **[Without any external APIs]** <br>
 > 본 파일은 프로젝트 초기 계획으로, 중기 / 말기 각 시점마다 새로운 README가 작성됨.
 
 ---
