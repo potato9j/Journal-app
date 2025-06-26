@@ -30,7 +30,7 @@ journal-app/
 │   │   │   └─ TabButton.jsx
 │   │   ├─ InputBox.jsx        # “거래를 입력하세요” 공용 입력창
 │   │   ├─ InputBox.module.css
-│   │   ├─ ChatArea.jsx        # GPT 답변 (분개 결과 log 창)
+│   │   ├─ ChatArea.jsx        # 분개 결과 log 창
 │   │   ├─ ChatArea.module.css
 │   │   ├─ ResultCard.jsx      # 차변/대변 결과
 │   │   └─ ResultCard.module.css
