@@ -1,10 +1,12 @@
-# P2-Accounting-Finance-System
+# Journal‑App
 
-# Journal‑App – Rule‑Based Accounting Entry Generator
+## RuleMatrix‑Based Accounting Entry Generator
 
 > **Stack** : React (Vite, **JavaScript**), GitHub Pages, Pure Client‑Side Rule Engine <br>
+
 > **Goal**: Convert Korean natural‑language transaction sentences into double‑entry journal entries (차변 / 대변) <br>
 > **[Without any external APIs]** <br>
+
 > 본 파일은 프로젝트 초기 계획으로, 중기 / 말기 각 시점마다 새로운 README가 작성됨.
 ---
 * 25년 06월 27일 02:57 update
@@ -192,7 +194,22 @@ OUT --> UI[ResultCard]
 ```
 문의 : 00000000@gmail.com
 ```
+<br>
 
+### UPDATE CONTENTS
+
+| date. | 대분류 | 세부내역 |
+| -- | --- | --- |
+| 25.05.27 | 프로젝트 기획&구성 | - |
+| 25.06.10 | 프로젝트 중단 | 시험기간 |
+| 25.06.24 | 프로젝트 재개 | 전체 재구성 | 
+| 25.06.24 | 자연어 처리를 통한 분석 방식 채택 (WAY1) | React(Vite, Javascript) + tailwind / GithubPages |
+| 25.06.25 | (WAY1) 폐기 | tailwind 오류 지속 |
+| 25.06.25 | Typescript기반 방식 채택, 기본 분석방식 동일 | Typescript |
+| 25.06.25 | Typescript 숙련도 이슈로 폐기 | - |
+| 25.06.26 | Rule규칙 설정 방식 채택 (WAY2) | 외부 API사용 X <br> React(Vite, Javascript) + VanillaCSS / GithunPages |
+| 25.06.26 | RuleMatrix 도입 | 기존 Rule 독자 방식의 경우, 수천 수만가지의 규칙 발생으로 RuleMatrix 방식으로 수천>수백>수십 30개 수준으로 규칙 감소 |
+| 25.06.26 | localhost beta test | 동작O <br> 손실, 수정분개 엔진 일부 보완 필요 / RuleMatrix 수정 필요
 
 
 
