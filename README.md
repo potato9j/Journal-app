@@ -2,7 +2,9 @@
 ## RuleMatrix‑Based Accounting Entry Generator
 --------------------------
 
-[스택, 개발기술 바로가기](https://github.com/potato9j/Journal-app/blob/main/README.md#stackdev)
+| 북마크 (바로가기) |
+| --  |
+| [스택, 개발기술 바로가기](stackdev) |
 
 
 
