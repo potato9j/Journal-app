@@ -1,0 +1,18 @@
+.box { display: flex; gap: 8px; margin-top: 16px; }
+
+textarea {
+  flex: 1;
+  height: 60px;
+  padding: 8px;
+  resize: none;
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+}

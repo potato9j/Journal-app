@@ -1,0 +1,7 @@
+@import url('./styles/variables.css');
+@import url('./styles/animations.css');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f5f6fa; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
