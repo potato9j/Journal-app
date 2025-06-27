@@ -1,20 +1,23 @@
-# Journal‑App
+# Journal‑App [분개 자동화 시스템]
 
 ## RuleMatrix‑Based Accounting Entry Generator
 
-> **Stack** : React (Vite, **JavaScript**), GitHub Pages, Pure Client‑Side Rule Engine <br>
-
-> **Goal**: Convert Korean natural‑language transaction sentences into double‑entry journal entries (차변 / 대변) <br>
-> **[Without any external APIs]** <br>
+| 계층 | 기술 | 사용 목적, 특징 |
+| -- | --- | --- |
+| language | JavaScript | 프런트+백엔드 |
+| Framework | React18 | 컴포넌트 단위 UI / CSR(고속HMR) |
+| build | Vite5 | ESM번들, 서버 스타트 |
+| routing | react-router-dom6 | 9개 탭 SPA전환 | 
+| style | CSS Modules + VanillaCSS | 전역 오류 X 방지 | 
+| 전역상태관리 | Reack hook (useState) | 페이지 단순 로컬 상태 |
+| CI/CD | GitHub Actions + Pages | `push-build-deploy` | 
+| 데이터 저장 | JSON(chat.json) | 250+ 계정가목, 동의어 정리 | 
+| 검증 | ESLint + Prettier | 코드 규칙성 확보 |
+> 외부 API,DB 미사용 : 모든 로직 브라우저(JS)에서 실행 
 
 > 본 파일은 프로젝트 초기 계획으로, 중기 / 말기 각 시점마다 새로운 README가 작성됨. <br>
-> 최하단 update contents 내역표 
----
-* 25년 06월 27일 02:57 update
-  * 베타 시스템 작동 확인 / 표면적 에러 수정
-  * <보완사항> 코드 간결화 / 복잡성 높은 구문 분석 메트릭스 보완
 
----
+--------------------------
 
 ## 1. Project Skeleton & Structure
 
@@ -57,7 +60,7 @@ journal-app/
 │   │   ├─ variables.css       # CSS 변수
 │   │   └─ animations.css
 │   ├─ engine/                # 분개 엔진 로직
-│   │   ├─ chart.json         # 사진의 표를 그대로 json화 (계정명, 동의어, 성격)
+│   │   ├─ chart.json         # 사진의 표를 그대로 json화 (계정명, 동의어, 성격) : +250개
 │   │   ├─ index.js           # 탭 종류에 따라 서브 파서 호출
 │   │   ├─ parserBasic.js     # 기초 분개
 │   │   ├─ parserAdjust.js    # 수정 분개 (기간, 월할, 일할)
@@ -72,22 +75,90 @@ journal-app/
 │       └─ number.js          # 한글 금액 → Number 변환
 └─ README.md                  # 현재 문서
 ```
+<br>
 
-**HTML & CSS 구성**
+-----------------------------------------------------------------
 
-* `public/index.html` : React 번들 삽입용 단일 HTML
-* `src/index.css` : 전역 타이포·컬러·Tailwind 지시자
-* `src/styles/tabs.css` : 탭‑활성/비활성 상태 스타일
+## 2-1. UPDATE CONTENTS [25.06.28]
+
+| date. | 대분류 | 세부내역 |
+| -- | --- | --- |
+| 25.05.27 | 프로젝트 기획&구성 | - |
+| 25.06.10 | 프로젝트 중단 | 시험기간 |
+| 25.06.24 | 프로젝트 재개 | 전체 재구성 | 
+| 25.06.24 | 자연어 처리를 통한 분석 방식 채택 (WAY1) | React(Vite, Javascript) + tailwind / GithubPages |
+| 25.06.25 | (WAY1) 폐기 | tailwind 오류 지속 |
+| 25.06.25 | Typescript기반 방식 채택, 기본 분석방식 동일 | Typescript |
+| 25.06.25 | Typescript 숙련도 이슈로 폐기 | - |
+| 25.06.26 | Rule규칙 설정 방식 채택 (WAY2) | 외부 API사용 X <br> React(Vite, Javascript) + VanillaCSS / GithunPages |
+| 25.06.26 | RuleMatrix 도입 | 기존 Rule 독자 방식의 경우, 수천 수만가지의 규칙 발생으로 RuleMatrix 방식으로 수천>수백>수십 30개 수준으로 규칙 감소 |
+| 25.06.26 | localhost beta test | 동작O <br> 손실, 수정분개 엔진 일부 보완 필요 / RuleMatrix 수정 필요
+<br>
+
+-----------------------------------------------------------------
+
+## 2-2. 데모 (개발서버)
+```bash
+git colone https://githun.com/000000/journal-app.git
+cd hournal-app
+npm install
+npm run dev    # http://localhost:0000
+```
+* 배포 : `npm run deploy` - gh-pages branch auto push
+<br>
+
+
+-----------------------------------------------------------------
+
+
+## 3-1. 핵심기술 - Rule Matrix
+* 동사 * 지급방법 * 대상계정 = 차변*대변 계정
+* 3차원 메트릭스 정의 후 수백가지 분개 규칙 자동 생성
+```
+      지급방법
+      ┌─────────────┐
+동사  │ 현금 │ 외상 │ ...
+┌─────┼──────┼──────┤
+│매입 │  상품 │ 외상매입금
+│매도 │ 현금  │ 외상매출금
+│지급 │      ...          ← resolveRule()
+└─────┴──────────────────┘
+```
+| FILEname. | contents | 
+| -- | --- |
+| `ruleMatrix.js` | VERB_GROUP + METHOD_MAP + TARGET_DEFAULT |
+| `chat.json` | 계정코드, 명칭, 동의어, 카테고리 모든 계정 저장 |
+| `parserBasic.js` | 문장 > 토큰 > resolveRule() 호출 |
+| `parserAdjust.js` | 월할/일할 이자, 감가상각 등 기간성 분개 |
+| `parserInventory.js` | FILFO/LIFO?이동총평균/실지재고 | 
+| `parserLoss.js` | 재고 감모, 평가손실 (원가 vs NRV) |
+<br>
+
+-----------------------------------------------------------------
+
+## 3-2. HTML & CSS 구성
+
+| FILEname. | contents | 역할 |
+| -- | --- | --- |
+| `index.html` | `<div id="root">` | React 마운팅 |
+| `components/Tabs` | tabs.jsx / TabButton.jsx / Tabs.modules.css | 상단 9개 탭, 우측 팝업 버튼 UI |
+| `components/InputBox.*` | `<textarea>` + Submit 버튼 | 거래입력 | 
+| `components/ChatArea.*` | 스크롤 영역, 결과 카드 | 분개 로그 표시 | 
+| `styles/variables.css` | `--primary`, `--gray` 등 테마 변수 | - |
+| `styles/animation.css` | `fadeIn` 공통 애니메이션 | - |
+* CSS Modules > `.module.css` 파일마다 클래스가 `hash_xyz`로 컴파일되어 전역 충돌 방지
+> 사실 맨처음에 tailwind로 하다가 이상한 에러를 못잡아서 CSS구성 변경함.
 
   ```css
   .tab-active    { @apply text-black font-semibold; }
   .tab-inactive  { @apply text-gray-400 backdrop-blur-sm; }
   ```
 * 각 탭 버튼(`TabButton.jsx`)은 `activeTab === name ? 'tab-active' : 'tab-inactive'`
+<br>
 
----
+-----------------------------------------------------------------
 
-## 2. 폴더 / 파일별 역할 요약
+## 3-3. 폴더 / 파일별 역할 요약
 
 | 경로                          | 역할                                                                       |
 | --------------------------- | ------------------------------------------------------------------------ |
@@ -97,9 +168,45 @@ journal-app/
 | **engine/accrual.js** | 수정분개(비용·수익 기간배분, 이자계산) 처리 함수                                             |
 | …                           | …                                                                        |
 
----
+-----------------------------------
 
-## 3. 단계별 작업 가이드
+## 3-4. 핵심 로직 흐름 (다이어그램)
+```mermaid
+flowchart TD
+  subgraph UI
+    A[사용자 입력
+      Textarea]
+    B[Tabs Router]
+    C[결과 카드
+      (ChatArea)]
+  end
+
+  subgraph Engine
+    D[parser*
+      (basic / adjust / inventory / loss)]
+    E[Rule Matrix
+      resolveRule()]
+    F[특수 계산기
+      (감가상각, 재고 util)]
+  end
+
+  A --문자열--> D
+  B --탭종류--> D
+  D --일반거래--> E
+  D --기간·재고--> F
+  E & F --{debit,credit,amount}--> C
+```
+* UI층
+ * 입력 문자열 + 현재 탭 종류를 엔진으로 전달
+* Engine층
+ * `parser*`가 입력을 분석 후 매트릭스, 특수 유틸 호출
+* 결과표시
+   * ChatArea가 카드 형태로 로그 출력 (ex. gpt입력창, 로그창)
+<br>
+
+-----------------------------------------------------------------
+
+## 4. 단계별 작업 가이드
 
 1. **프로젝트 생성 & 의존성 설치**
 
@@ -145,37 +252,28 @@ journal-app/
 7. **parser.js** – 텍스트 → `{ debit, credit, amount }` 로 변환
 8. **배포 스크립트 & GitHub Actions** 설정 (위 스니펫)
 9. **UI 검수** – 활성 탭 외 나머지 탭 blur/gray 동작 확인
+<br>
 
----
+-----------------------------------------------------------------
 
-## 4. 핵심 로직 흐름 (다이어그램)
+## 5. LICENSE
+> MIT License - 자유 사용, 수정, 배포 가능 (저작권 문구 유지)
+<br>
 
-```
-graph TD
-IN[입력 텍스트] --> TOK(Tokenizer)
-TOK --> CLS(Key Classifier)
-CLS --> BRANCH{탭 종류}
-BRANCH -->|기초| RULES1[ruleMatrix lookup]
-BRANCH -->|수정| ACCRUAL[accrual.js]
-BRANCH -->|재고| RULES2
-BRANCH -->|손실| RULES3
-RULES1 & RULES2 & RULES3 & ACCRUAL --> OUT[분개 객체]
-OUT --> UI[ResultCard]
-```
+-----------------------------------------------------------------
 
----
-
-## 5. 최종 목표 체크리스트 ✅
+## 6. 최종 목표 체크리스트 
 
 * Vite(reactJS) 프로젝트 생성 완료
 * `dictionary.js` 모든 계정과목 입력되어 있는가
 * `ruleMatrix.js` 기본 거래 30개 룰 작성
 * `parser.js` 룰 매칭
 * Github Pages 주소 UI, 분개 결과 확인
+<br>
 
----
+-----------------------------------------------------------------
 
-## 6. 팝업 내용 초안
+## 7. 팝업 내용 초안
 
 **제작**
 ```
@@ -196,22 +294,6 @@ OUT --> UI[ResultCard]
 문의 : 00000000@gmail.com
 ```
 <br>
-
-### UPDATE CONTENTS
-
-| date. | 대분류 | 세부내역 |
-| -- | --- | --- |
-| 25.05.27 | 프로젝트 기획&구성 | - |
-| 25.06.10 | 프로젝트 중단 | 시험기간 |
-| 25.06.24 | 프로젝트 재개 | 전체 재구성 | 
-| 25.06.24 | 자연어 처리를 통한 분석 방식 채택 (WAY1) | React(Vite, Javascript) + tailwind / GithubPages |
-| 25.06.25 | (WAY1) 폐기 | tailwind 오류 지속 |
-| 25.06.25 | Typescript기반 방식 채택, 기본 분석방식 동일 | Typescript |
-| 25.06.25 | Typescript 숙련도 이슈로 폐기 | - |
-| 25.06.26 | Rule규칙 설정 방식 채택 (WAY2) | 외부 API사용 X <br> React(Vite, Javascript) + VanillaCSS / GithunPages |
-| 25.06.26 | RuleMatrix 도입 | 기존 Rule 독자 방식의 경우, 수천 수만가지의 규칙 발생으로 RuleMatrix 방식으로 수천>수백>수십 30개 수준으로 규칙 감소 |
-| 25.06.26 | localhost beta test | 동작O <br> 손실, 수정분개 엔진 일부 보완 필요 / RuleMatrix 수정 필요
-
 
 
 
