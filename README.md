@@ -2,7 +2,7 @@
 ## RuleMatrix‑Based Accounting Entry Generator
 --------------------------
 
-[스택, 개발기술 바로가기](#stack/dev.)
+[스택, 개발기술 바로가기](##stack/dev.)
 
 
 
