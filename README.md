@@ -1,5 +1,8 @@
 # Journal‑App [분개 자동화 시스템]
 ## RuleMatrix‑Based Accounting Entry Generator
+
+>  `.github`, `node_modules`, `index.html` 미업로드
+
 --------------------------
 
 | num. | Readme 설명 바로가기 |
@@ -18,7 +21,7 @@
 | 7 | [팝업 내용 초안 바로가기](#7-팝업-내용-초안) |
 > 00바로가기 클릭시, 해당 문단으로 이동됩니다.
 
-> `.github`, `node_modules` 미업로드
+
 
 <br>
 
