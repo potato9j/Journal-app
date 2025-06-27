@@ -1,6 +1,17 @@
 # Journal‑App [분개 자동화 시스템]
-
 ## RuleMatrix‑Based Accounting Entry Generator
+--------------------------
+
+[스택, 개발기술 바로가기](#stack/dev.)
+
+
+
+
+<br>
+
+--------------------------
+
+## stack/dev.
 
 | 계층 | 기술 | 사용 목적, 특징 |
 | -- | --- | --- |
