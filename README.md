@@ -2,7 +2,7 @@
 ## RuleMatrix‑Based Accounting Entry Generator
 --------------------------
 
-| num. | 북마크 (바로가기) |
+| num. | Readme 설명 바로가기 |
 | --  | -- |
 | 0 | [스택‧개발기술 바로가기](#stackdev) |
 | 1 | [코드 구조 바로가기](#1-project-skeleton--structure) |
