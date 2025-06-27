@@ -173,30 +173,25 @@ npm run dev    # http://localhost:0000
 -----------------------------------
 
 ## 3-4. 핵심 로직 흐름 (다이어그램)
-
-```mermaid
+```
 flowchart TD
-  %% ---------- UI 층 ----------
   subgraph UI
-    A[사용자 입력<br/>Textarea]
-    B[Tabs Router]
-    C[결과 카드<br/>(ChatArea)]
+    A[사용자 입력&nbsp;<br/>Textarea]
+    B[Tabs&nbsp;Router]
+    C[결과&nbsp;카드&nbsp;<br/>(ChatArea)]
   end
 
-  %% ---------- Engine 층 ----------
   subgraph Engine
     D[parser*<br/>(basic · adjust · inventory · loss)]
-    E[Rule Matrix<br/>resolveRule()]
-    F[특수 계산기<br/>(감가상각 · 재고 util)]
+    E[Rule&nbsp;Matrix&nbsp;<br/>resolveRule()]
+    F[특수&nbsp;계산기&nbsp;<br/>(감가상각 · 재고&nbsp;util)]
   end
 
-  %% ---------- 흐름 ----------
-  A -->|문자열| D
-  B -->|탭 종류| D
-  D -->|일반 거래| E
-  D -->|기간·재고| F
-  E --> C
-  F --> C
+  A -- 문자열 --> D
+  B -- 탭종류 --> D
+  D -- 일반거래 --> E
+  D -- 기간·재고 --> F
+  E & F -- {debit, credit, amount} --> C
 ```
 * UI층
  * 입력 문자열 + 현재 탭 종류를 엔진으로 전달
