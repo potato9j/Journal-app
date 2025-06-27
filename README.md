@@ -5,7 +5,7 @@
 | num. | 북마크 (바로가기) |
 | --  | -- |
 | 0 | [스택‧개발기술 바로가기](#stackdev) |
-| 1 | [코드 구조 바로가기](#1-Project-Skeleton-&-Structure) |
+| 1 | [코드 구조 바로가기](#1-project-skeleton--structure) |
 
 
 
@@ -94,7 +94,7 @@ journal-app/
 
 -----------------------------------------------------------------
 
-## 2-1. UPDATE CONTENTS [25.06.28]
+## 2-1. UPDATE CONTENTS
 
 | date. | 대분류 | 세부내역 |
 | -- | --- | --- |
