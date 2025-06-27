@@ -207,17 +207,18 @@ flowchart TD
 
 1. **프로젝트 생성 & 의존성 설치**
 
-   ```bash
+```bash
    npm create vite@latest journal-app -- --template react
    cd journal-app && npm i
    npm i react-router-dom gh-pages
    # Tailwind (선택)
    npm i -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p
-   ```
+```
+
 2. **Tabs + Router + Pop‑up Trigger**
 
-  ```
+```
   // App.jsx (발췌)
   const [showModal, setShowModal] = useState(null); // 'about'|'help'|'support'|null
   <header>
@@ -230,18 +231,18 @@ flowchart TD
   </header>
   {showModal==='about' && <AboutModal onClose={()=>setShowModal(null)} />}
   {/* ... */}
-  ```
+```
 
 
 3. **Chat Area** – 각 탭 화면에서
 
-  ```
+```
   const [messages,setMessages]=useState([]);
   const handleSubmit=(txt)=>{
     const res=parse(txt, activeTab);
     setMessages([...messages,{role:'user',txt},{role:'system',res}]);
   }
-  ```
+```
 
 4. **각 routes/** 작성 – 9개 탭 화면. 공통 UI 컴포넌트 사용
 5. **Modal CSS** - `position:fixed; top:50%; left:50%; transform:translate(-50%,-50%)` + `backdrop-filter:blur(2px)`
