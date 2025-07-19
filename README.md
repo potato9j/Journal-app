@@ -122,7 +122,7 @@ journal-app/
 | 25.06.26 | Rule규칙 설정 방식 채택 (WAY2) | 외부 API사용 X <br> React(Vite, Javascript) + VanillaCSS / GithunPages |
 | 25.06.26 | RuleMatrix 도입 | 기존 Rule 독자 방식의 경우, 수천 수만가지의 규칙 발생으로 RuleMatrix 방식으로 수천>수백>수십 30개 수준으로 규칙 감소 |
 | 25.06.26 | localhost beta test | 동작O <br> 손실, 수정분개 엔진 일부 보완 필요 / RuleMatrix 수정 필요
-| 25.07.18 |parserInventory.js 로직 변경 ||
+| 25.07.18 |`parserInventory.js` 로직 변경 ||
 <br>
 
 -----------------------------------------------------------------
